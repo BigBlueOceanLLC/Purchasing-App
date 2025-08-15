@@ -5,12 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "cd backend && npm install",
     "lint": "eslint .",
     "preview": "vite preview",
-    "build:backend": "cd backend && npm install",
     "start": "cd backend && npm start",
-    "dev:backend": "cd backend && npm start"
+    "dev:backend": "cd backend && npm start",
+    "build:frontend": "tsc -b && vite build"
   },
   "dependencies": {
     "date-fns": "^4.1.0",
