@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decimal Pounds Enhancement - Seafood Purchasing App</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #0369a1;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #0369a1;
+        }
+        .feature {
+            background-color: #f0fdf4;
+            border-left-color: #10b981;
+        }
+        .technical {
+            background-color: #f8fafc;
+            border-left-color: #6366f1;
+        }
+        .example {
+            background-color: #fef3c7;
+            border-left-color: #f59e0b;
+        }
+        .input-demo {
+            background: #f3f4f6;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 15px 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+        .input-demo input {
+            width: 150px;
+            padding: 8px;
+            border: 1px solid #9ca3af;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        .before-after {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .before {
+            background: #fee2e2;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #dc2626;
+        }
+        .after {
+            background: #dcfce7;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #16a34a;
+        }
+        .highlight {
+            background: #fbbf24;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .precision-example {
+            font-family: 'Monaco', 'Menlo', monospace;
+            background: #1f2937;
+            color: #e5e7eb;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚖️ Enhanced Decimal Precision for Pounds</h1>
+        
+        <div class="section feature">
+            <h2>✨ Enhancement Overview</h2>
+            <p>The pounds input fields now support <strong>enhanced decimal precision</strong> to accommodate real-world seafood weighing practices:</p>
+            
+            <div class="input-demo">
+                <label><strong>Total Pounds:</strong></label><br>
+                <input type="number" step="0.01" value="25.75" readonly> ← Now supports hundredths (0.01)
+            </div>
+            
+            <div class="input-demo">
+                <label><strong>Individual Item Pounds:</strong></label><br>
+                <input type="number" step="0.01" value="12.25" readonly> ← Precise measurements
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔄 Before vs After Comparison</h2>
+            
+            <div class="before-after">
+                <div class="before">
+                    <h3>❌ Before (Limited Precision)</h3>
+                    <ul>
+                        <li><code>step="0.1"</code> (tenths only)</li>
+                        <li>Could enter: 25.1, 25.2, 25.3...</li>
+                        <li>Validation tolerance: 0.1 lbs</li>
+                        <li>Display: 25.1 lbs</li>
+                    </ul>
+                </div>
+                
+                <div class="after">
+                    <h3>✅ After (Enhanced Precision)</h3>
+                    <ul>
+                        <li><code>step="0.01"</code> (hundredths)</li>
+                        <li>Can enter: 25.75, 25.33, 25.01...</li>
+                        <li>Validation tolerance: 0.01 lbs</li>
+                        <li>Display: 25.75 lbs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section example">
+            <h2>🐟 Real-World Use Cases</h2>
+            
+            <h3>Perfect for These Scenarios:</h3>
+            <ul>
+                <li><strong>Salmon Fillets:</strong> 15.75 lbs (common scale readings)</li>
+                <li><strong>Shrimp Portions:</strong> 3.25 lbs (precise portioning)</li>
+                <li><strong>Mixed Seafood:</strong> 8.33 lbs (divided quantities)</li>
+                <li><strong>High-Value Items:</strong> 2.05 lbs (every ounce counts)</li>
+                <li><strong>Bulk Processing:</strong> 47.66 lbs (industrial scale precision)</li>
+            </ul>
+            
+            <div class="precision-example">Example Shipment:
+• Large Salmon: 15.75 lbs
+• Medium Salmon: 8.25 lbs  
+• Total: 24.00 lbs ✓ (matches exactly)</div>
+        </div>
+
+        <div class="section technical">
+            <h2>🔧 Technical Changes Made</h2>
+            
+            <h3>1. Input Field Updates:</h3>
+            <ul>
+                <li><strong>Total Pounds Input:</strong> <span class="highlight">step="0.01"</span> (was 0.1)</li>
+                <li><strong>Individual Item Pounds:</strong> <span class="highlight">step="0.01"</span> (was 0.1)</li>
+                <li><strong>Minimum Value:</strong> Still 0 (no negative weights)</li>
+                <li><strong>Input Type:</strong> Still "number" with proper validation</li>
+            </ul>
+            
+            <h3>2. Validation Logic Enhanced:</h3>
+            <ul>
+                <li><strong>Tolerance Updated:</strong> 0.01 lbs (was 0.1 lbs)</li>
+                <li><strong>Formula:</strong> <code>Math.abs(itemsTotal - totalPounds) > 0.01</code></li>
+                <li><strong>Error Handling:</strong> Still prevents submission if totals don't match</li>
+            </ul>
+            
+            <h3>3. Display Formatting Improved:</h3>
+            <ul>
+                <li><strong>Form Totals:</strong> Show 2 decimal places (25.75 lbs)</li>
+                <li><strong>Confirmation Screen:</strong> Show 2 decimal places for precision</li>
+                <li><strong>Other Displays:</strong> Kept at appropriate precision for context</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>📊 Precision Levels Explained</h2>
+            
+            <div class="precision-example">Input Precision Levels:
+step="1"     → 25, 26, 27... (whole numbers)
+step="0.1"   → 25.1, 25.2, 25.3... (tenths) 
+step="0.01"  → 25.75, 25.33, 25.01... ← NOW SUPPORTED
+step="0.001" → 25.758, 25.333... (thousandths)</div>
+            
+            <p><strong>Why 0.01 precision?</strong></p>
+            <ul>
+                <li>🎯 <strong>Industry Standard:</strong> Most commercial scales read to hundredths</li>
+                <li>💰 <strong>Cost Accuracy:</strong> Better pricing calculations with precise weights</li>
+                <li>⚖️ <strong>Real Measurements:</strong> Matches actual scale readings</li>
+                <li>🧮 <strong>Easy Math:</strong> Simple for users to understand and validate</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>✅ What Works Better Now</h2>
+            
+            <h3>Enhanced User Experience:</h3>
+            <ul>
+                <li><strong>Accurate Entry:</strong> Enter exactly what the scale shows</li>
+                <li><strong>Precise Validation:</strong> Tighter tolerance prevents small errors</li>
+                <li><strong>Better Display:</strong> See the exact amounts in confirmations</li>
+                <li><strong>Real-World Ready:</strong> Handles commercial seafood weights properly</li>
+            </ul>
+            
+            <h3>Improved Business Operations:</h3>
+            <ul>
+                <li><strong>Cost Calculations:</strong> More accurate pricing with precise weights</li>
+                <li><strong>Inventory Tracking:</strong> Better weight accuracy for stock management</li>
+                <li><strong>Compliance:</strong> Meets commercial weighing standards</li>
+                <li><strong>Quality Control:</strong> Precise measurements for quality assurance</li>
+            </ul>
+        </div>
+
+        <div class="section feature">
+            <h2>🚀 Ready to Use!</h2>
+            <p>The enhanced decimal precision is now active in all pound input fields:</p>
+            
+            <ul>
+                <li><strong>✅ Total Pounds:</strong> Accept values like 25.75, 12.33, 8.05</li>
+                <li><strong>✅ Item Breakdown:</strong> Enter precise weights for each size category</li>
+                <li><strong>✅ Validation:</strong> Ensures totals match within 0.01 lbs</li>
+                <li><strong>✅ Display:</strong> Shows full precision where it matters</li>
+                <li><strong>✅ Calculations:</strong> All quota and cost calculations use precise values</li>
+            </ul>
+            
+            <p style="margin-top: 20px; font-weight: 600; color: #10b981;">
+                🎯 Try it now: Create a new shipment and enter precise decimal weights like 15.75 lbs!
+            </p>
+        </div>
+    </div>
+</body>
+</html>

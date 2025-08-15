@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Shipment Functionality - Seafood Purchasing App</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #dc2626;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #dc2626;
+        }
+        .feature {
+            background-color: #f8fafc;
+            border-left-color: #dc2626;
+        }
+        .warning {
+            background-color: #fef3c7;
+            border-left-color: #f59e0b;
+        }
+        .success {
+            background-color: #f0fdf4;
+            border-left-color: #10b981;
+        }
+        .delete-button {
+            background: #dc2626;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 10px 0;
+            border: none;
+            cursor: pointer;
+        }
+        .delete-button:hover {
+            background: #b91c1c;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .highlight {
+            background: #fbbf24;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        .danger-text {
+            color: #dc2626;
+            font-weight: 600;
+        }
+        .confirmation-box {
+            background: #fef2f2;
+            border: 2px solid #fecaca;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        .button-demo {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .edit-btn {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #bfdbfe;
+        }
+        .delete-btn {
+            background: #fee2e2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🗑️ Delete Shipment Functionality</h1>
+        
+        <div class="section feature">
+            <h2>✨ New Delete Feature Overview</h2>
+            <p>Users can now safely delete shipments with comprehensive confirmation and impact warnings:</p>
+            <ul>
+                <li><strong>Delete Buttons:</strong> Available in both Purchase History and Pending Purchases</li>
+                <li><strong>Confirmation Dialog:</strong> Detailed confirmation with impact summary</li>
+                <li><strong>Automatic Cleanup:</strong> Removes shipment and all associated purchases</li>
+                <li><strong>Quota Recalculation:</strong> Automatically updates quota calculations</li>
+                <li><strong>Safe Operation:</strong> Cannot be undone, clearly communicated to users</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>📍 Where to Find Delete Buttons</h2>
+            
+            <h3>Purchase History Page:</h3>
+            <p>In each shipment card, you'll find action buttons in the top-right corner:</p>
+            <div style="margin: 15px 0;">
+                <span class="button-demo edit-btn">✏️ Edit</span>
+                <span class="button-demo delete-btn">🗑️ Delete</span>
+                <span class="button-demo" style="background: #f3f4f6; color: #6b7280; border: 1px solid #d1d5db;">▼ Expand</span>
+            </div>
+            
+            <h3>Pending Purchases Page:</h3>
+            <p>Similar action buttons are available for pending shipments:</p>
+            <div style="margin: 15px 0;">
+                <span class="button-demo edit-btn">✏️ Edit</span>
+                <span class="button-demo delete-btn">🗑️ Delete</span>
+            </div>
+        </div>
+
+        <div class="section warning">
+            <h2>⚠️ Confirmation Dialog Features</h2>
+            <p>When you click the delete button, a detailed confirmation dialog appears with:</p>
+            
+            <div class="confirmation-box">
+                <h3 style="color: #dc2626; margin-top: 0;">🚨 Delete Shipment Confirmation</h3>
+                
+                <h4>Shipment Summary:</h4>
+                <ul>
+                    <li><strong>Shipper Name</strong> and approval status</li>
+                    <li><strong>Number of products</strong> in the shipment</li>
+                    <li><strong>Total weight</strong> and estimated cost</li>
+                    <li><strong>Purchase Order Number</strong> (if approved)</li>
+                </ul>
+                
+                <h4>Impact Warning:</h4>
+                <ul style="color: #dc2626;">
+                    <li>• Shipment will be permanently removed</li>
+                    <li>• All associated products and purchases will be deleted</li>
+                    <li>• Quota calculations will be updated automatically</li>
+                    <li>• Purchase order will be invalidated (if applicable)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section feature">
+            <h2>🔧 Technical Implementation</h2>
+            <h3>What Happens When You Delete:</h3>
+            <ul>
+                <li><strong>Shipment Removal:</strong> Shipment record completely removed from state</li>
+                <li><strong>Purchase Cleanup:</strong> All associated Purchase records deleted</li>
+                <li><strong>Quota Impact:</strong> Quota calculations automatically recalculated</li>
+                <li><strong>State Persistence:</strong> Changes immediately saved to localStorage</li>
+                <li><strong>UI Updates:</strong> Interface immediately reflects changes</li>
+            </ul>
+            
+            <h3>Safety Features:</h3>
+            <ul>
+                <li><strong>No Accidental Deletes:</strong> Two-step confirmation process</li>
+                <li><strong>Clear Impact Warning:</strong> Users understand exactly what will happen</li>
+                <li><strong>Visual Distinction:</strong> Red delete buttons clearly marked</li>
+                <li><strong>Detailed Summary:</strong> Shows exactly what's being deleted</li>
+            </ul>
+        </div>
+
+        <div class="section success">
+            <h2>✅ Use Cases for Deletion</h2>
+            
+            <h3>Perfect for:</h3>
+            <ul>
+                <li><strong>Entry Errors:</strong> Wrong shipper name, incorrect products, or bad dates</li>
+                <li><strong>Canceled Orders:</strong> Supplier cancellations or business changes</li>
+                <li><strong>Duplicate Entries:</strong> Accidentally created the same shipment twice</li>
+                <li><strong>Test Data Cleanup:</strong> Removing test entries during setup</li>
+                <li><strong>Order Changes:</strong> Major changes that require re-creating the shipment</li>
+            </ul>
+            
+            <h3>Works with Both Types:</h3>
+            <ul>
+                <li><strong>Approved Shipments:</strong> Deletes PO number and recalculates quotas</li>
+                <li><strong>Pending Shipments:</strong> Removes from pending list and frees up quota</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🎯 User Workflow</h2>
+            <ol style="font-size: 16px; line-height: 1.8;">
+                <li><strong>Navigate</strong> to Purchase History or Pending Purchases</li>
+                <li><strong>Find the shipment</strong> you want to delete</li>
+                <li><strong>Click the red trash icon</strong> (🗑️) in the action buttons</li>
+                <li><strong>Review the confirmation dialog</strong> with shipment details and impact</li>
+                <li><strong>Confirm deletion</strong> by clicking "Delete Shipment"</li>
+                <li><strong>Shipment disappears</strong> and quotas are automatically updated</li>
+            </ol>
+        </div>
+
+        <div class="section warning">
+            <h2>⚡ Important Notes</h2>
+            <ul>
+                <li class="danger-text"><strong>Permanent Action:</strong> Deletions cannot be undone</li>
+                <li><strong>Quota Impact:</strong> Deleting approved shipments frees up quota for new purchases</li>
+                <li><strong>PO Numbers:</strong> Deleted approved shipments invalidate their purchase orders</li>
+                <li><strong>History Impact:</strong> Analytics and reports will reflect the deletion immediately</li>
+                <li><strong>State Consistency:</strong> All related data is automatically cleaned up</li>
+            </ul>
+        </div>
+
+        <div class="section success">
+            <h2>🚀 Ready to Use!</h2>
+            <p>The delete functionality is now fully implemented and ready for production use. Key benefits:</p>
+            <ul>
+                <li><strong>Error Correction:</strong> Easy way to fix mistakes and data entry errors</li>
+                <li><strong>Order Management:</strong> Handle cancellations and changes efficiently</li>
+                <li><strong>Data Integrity:</strong> Automatic cleanup ensures consistent state</li>
+                <li><strong>User Safety:</strong> Clear confirmation prevents accidental deletions</li>
+                <li><strong>Quota Accuracy:</strong> Automatic recalculation maintains accurate limits</li>
+            </ul>
+            
+            <p style="margin-top: 20px;"><strong>Look for the red trash can icons (🗑️) next to the edit buttons in your shipment lists!</strong></p>
+        </div>
+    </div>
+</body>
+</html>

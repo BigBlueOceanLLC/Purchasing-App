@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approval System Demo - Seafood Purchasing App</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #0369a1;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #0369a1;
+        }
+        .approved {
+            background-color: #f0fdf4;
+            border-left-color: #22c55e;
+        }
+        .pending {
+            background-color: #fefce8;
+            border-left-color: #eab308;
+        }
+        .feature {
+            background-color: #f8fafc;
+            border-left-color: #6366f1;
+        }
+        .po-number {
+            background: #22c55e;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 16px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .approved-badge {
+            background: #dcfce7;
+            color: #166534;
+        }
+        .pending-badge {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .highlight {
+            background: #fbbf24;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        .screenshot {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐟 Seafood Purchasing App - Approval System</h1>
+        
+        <div class="section feature">
+            <h2>✨ New Approval System Features</h2>
+            <p>The app now includes a comprehensive approval workflow for shipments based on quota status:</p>
+            <ul>
+                <li><strong>Automatic Approval:</strong> Shipments are auto-approved when quotas are under limits</li>
+                <li><strong>Manual Approval:</strong> Shipments require approval when quotas are near-max or over</li>
+                <li><strong>Purchase Order Numbers:</strong> Generated automatically for approved shipments</li>
+                <li><strong>Confirmation Screen:</strong> Shows approval status and PO numbers after submission</li>
+                <li><strong>Pending Tab:</strong> New navigation tab for managing pending approvals</li>
+                <li><strong>Copy to Clipboard:</strong> One-click copy for purchase order numbers</li>
+            </ul>
+        </div>
+
+        <div class="section approved">
+            <h2>✅ Approved Shipment Example</h2>
+            <div>
+                <span class="status-badge approved-badge">✓ Approved</span>
+                <strong>Boston Fish Market</strong>
+            </div>
+            <p>When a shipment is automatically approved, you'll see:</p>
+            <ul>
+                <li>Immediate approval confirmation</li>
+                <li>Purchase order number assigned:</li>
+            </ul>
+            <div class="po-number">PO-20250814-0001</div>
+            <p><strong>Copy Feature:</strong> Click the "Copy" button to copy the PO number to clipboard for easy sharing with suppliers and invoicing systems.</p>
+        </div>
+
+        <div class="section pending">
+            <h2>⏳ Pending Approval Example</h2>
+            <div>
+                <span class="status-badge pending-badge">⏳ Pending</span>
+                <strong>Atlantic Seafood Co.</strong>
+            </div>
+            <p>When a shipment requires approval due to quota limits:</p>
+            <ul>
+                <li>Clear notification that manual approval is needed</li>
+                <li>Explanation about quota status</li>
+                <li>Accessible via the new "Pending" tab</li>
+                <li>One-click approval button for managers</li>
+                <li>No PO number until approved</li>
+            </ul>
+        </div>
+
+        <div class="section feature">
+            <h2>🎯 How the Approval Logic Works</h2>
+            <h3>Automatic Approval Criteria:</h3>
+            <ul>
+                <li>Current quota status is <span class="highlight">"under"</span> or <span class="highlight">"good"</span></li>
+                <li>Adding the shipment won't push any product over quota limits</li>
+                <li>PO number is generated immediately</li>
+            </ul>
+            
+            <h3>Manual Approval Required When:</h3>
+            <ul>
+                <li>Quota status is already <span class="highlight">"near-max"</span> or <span class="highlight">"over"</span></li>
+                <li>Adding the shipment would exceed quota limits</li>
+                <li>Shipment appears in "Pending Purchases" tab</li>
+            </ul>
+        </div>
+
+        <div class="section feature">
+            <h2>🚀 New User Interface Elements</h2>
+            <h3>Enhanced Shipment Display:</h3>
+            <ul>
+                <li><strong>Approval Status Badges:</strong> Visible on all shipment cards</li>
+                <li><strong>Purchase Order Numbers:</strong> Prominently displayed with copy functionality</li>
+                <li><strong>Confirmation Modal:</strong> Appears after shipment submission</li>
+                <li><strong>Pending Tab:</strong> Fourth navigation tab for approval management</li>
+            </ul>
+            
+            <h3>Copy-to-Clipboard Feature:</h3>
+            <ul>
+                <li>Available in confirmation modal</li>
+                <li>Available in expanded shipment details</li>
+                <li>Visual feedback when copied</li>
+                <li>Format: PO-YYYYMMDD-XXXX (e.g., PO-20250814-0001)</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>📱 Navigation Updates</h2>
+            <p>The bottom navigation now includes four tabs:</p>
+            <ul>
+                <li><strong>Dashboard:</strong> Quota overview and analytics</li>
+                <li><strong>Purchases:</strong> All approved shipments and history</li>
+                <li><strong>Pending:</strong> ⭐ <em>NEW!</em> Shipments awaiting approval</li>
+                <li><strong>Settings:</strong> Product quotas and configuration</li>
+            </ul>
+        </div>
+
+        <div class="section feature">
+            <h2>🔧 Technical Implementation</h2>
+            <p>The approval system has been integrated with full backward compatibility:</p>
+            <ul>
+                <li><strong>Existing Data:</strong> All existing shipments are marked as "approved"</li>
+                <li><strong>Quota Integration:</strong> Uses existing quota calculation logic</li>
+                <li><strong>Type Safety:</strong> Full TypeScript support for new fields</li>
+                <li><strong>State Management:</strong> Integrated with existing useAppState hook</li>
+                <li><strong>Persistence:</strong> Approval status and PO numbers saved to localStorage</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🎉 Ready to Use!</h2>
+            <p>The approval system is now fully implemented and ready for production use. Key benefits:</p>
+            <ul>
+                <li><strong>Quota Compliance:</strong> Automatic enforcement of purchasing limits</li>
+                <li><strong>Streamlined Workflow:</strong> Instant approval for routine purchases</li>
+                <li><strong>Management Oversight:</strong> Manual review for over-limit purchases</li>
+                <li><strong>Easy Tracking:</strong> Purchase order numbers for all approved shipments</li>
+                <li><strong>User-Friendly:</strong> Clear confirmation screens and copy functionality</li>
+            </ul>
+            
+            <p><strong>To see it in action:</strong> Create a new shipment through the Dashboard's + button. The system will automatically determine if it needs approval based on your current quotas!</p>
+        </div>
+    </div>
+</body>
+</html>
